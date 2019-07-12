@@ -2,6 +2,7 @@ package com.example.schema
 
 import net.corda.core.schemas.MappedSchema
 import net.corda.core.schemas.PersistentState
+import java.time.ZonedDateTime
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -32,9 +33,13 @@ object IOUSchemaV1 : MappedSchema(
             var value: Int,
 
             @Column(name = "linear_id")
-            var linearId: UUID
+            var linearId: UUID,
+
+            @Column(name = "time_now")
+            var timeNow: ZonedDateTime
+
     ) : PersistentState() {
         // Default constructor required by hibernate.
-        constructor(): this("", "", 0, UUID.randomUUID())
+        constructor(): this("", "", 0, UUID.randomUUID(), ZonedDateTime.now())
     }
 }
